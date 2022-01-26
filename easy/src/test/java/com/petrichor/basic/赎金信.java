@@ -1,8 +1,7 @@
-package com.petrichor.test;
+package com.petrichor.basic;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

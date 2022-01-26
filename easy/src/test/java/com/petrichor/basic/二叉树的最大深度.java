@@ -1,4 +1,4 @@
-package com.petrichor.test;
+package com.petrichor.basic;
 
 import org.junit.Test;
 

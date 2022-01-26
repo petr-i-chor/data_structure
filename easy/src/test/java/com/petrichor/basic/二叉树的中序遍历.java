@@ -1,9 +1,11 @@
-package com.petrichor.test;
+package com.petrichor.basic;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @Author jh
@@ -51,11 +53,17 @@ public class 二叉树的中序遍历 {
      * @return:
      */
 
+    /**
+     *          1
+     *       2     5
+     *     3  4  6         3 2 4 1 6 5
+     */
+
 
     @Test
     public void main() {
         TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(3), new TreeNode(4)), new TreeNode(5, new TreeNode(6), null));
-        List<Integer> result = inorderTraversal(root);
+        List<Integer> result = inorderTraversal3(root);
         for (int i = 0; i < result.size(); i++) {
             System.out.print(result.get(i) + "\t");
         }
@@ -75,6 +83,32 @@ public class 二叉树的中序遍历 {
         inorderTraversal2(root.left, list);
         list.add(root.val);
         inorderTraversal2(root.right, list);
+    }
+
+    public LinkedList<Integer> inorderTraversal3(TreeNode root) {
+
+        if (root == null) return new LinkedList<Integer>();
+
+        LinkedList<Integer> res = new LinkedList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
+        stack.push(root);
+
+        while (!stack.empty()){
+            if (stack.peek()!=null){
+                TreeNode node = stack.pop();
+                if (node.right != null) stack.push(node.right);
+                stack.push(node);
+                stack.push(null);
+                if (node.left != null) stack.push(node.left);
+            }else {
+                stack.pop();
+                res.add(stack.pop().val);
+            }
+
+        }
+        return res;
+
     }
 
     public class TreeNode {

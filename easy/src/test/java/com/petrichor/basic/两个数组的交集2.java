@@ -1,12 +1,9 @@
-package com.petrichor.test;
+package com.petrichor.basic;
 
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @Author jh

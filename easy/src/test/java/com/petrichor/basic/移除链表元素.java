@@ -1,8 +1,6 @@
-package com.petrichor.test;
+package com.petrichor.basic;
 
 import org.junit.Test;
-
-import java.time.OffsetDateTime;
 
 /**
  * @Author jh
