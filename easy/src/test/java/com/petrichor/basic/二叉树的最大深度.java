@@ -2,6 +2,9 @@ package com.petrichor.basic;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @Author jh
  * @Description
@@ -45,12 +48,40 @@ public class 二叉树的最大深度 {
 
     @Test
     public void main(){
-        TreeNode root = new TreeNode(1,new TreeNode(2,new TreeNode(3),new TreeNode(4)),new TreeNode(5,new TreeNode(6),null));
-        System.out.println(maxDepth(root));
+//        TreeNode root = new TreeNode(1,new TreeNode(2,new TreeNode(3),new TreeNode(4)),new TreeNode(5,new TreeNode(6),null));
+        TreeNode root = new TreeNode(0,
+                new TreeNode(2,new TreeNode(1,new TreeNode(5),new TreeNode(1)),null),
+                new TreeNode(4,new TreeNode(3,null,new TreeNode(6)),new TreeNode(-1,null,new TreeNode(8))));
+        System.out.println(maxDepth2(root));
     }
     public int maxDepth(TreeNode root) {
         return root == null ? 0 : 1+Math.max(maxDepth(root.left),maxDepth(root.right));
     }
+
+    public int maxDepth2(TreeNode root) {
+        int depth = 0;
+
+        if (root == null) return depth;
+
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()){
+            int size = queue.size();
+
+            for (int i = 0; i <size; i++) {
+                TreeNode node = queue.poll();
+                if(node.left!=null)  queue.offer(node.left);
+                if(node.right!=null)  queue.offer(node.right);
+            }
+            depth++;
+
+        }
+
+
+        return depth;
+    }
+
 
     public class TreeNode {
         int val;
