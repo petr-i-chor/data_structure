@@ -10,6 +10,7 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>easy</module>
+      <module>spider</module>
   </modules>
 
   <name>data_structure</name>
