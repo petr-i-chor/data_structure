@@ -42,8 +42,8 @@ public class 搜索旋转排序数组 {
      */
     @Test
     public void test() {
-//        int[] nums = { 0 ,1 , 2 , 4, 5, 6, };
-        int[] nums = {1, 0};
+        int[] nums = { 0 ,1 , 2 , 4, 5, 6, };
+//        int[] nums = {1, 0};
         int target = 1;
         System.out.println(search(nums, target));
     }
@@ -62,20 +62,20 @@ public class 搜索旋转排序数组 {
         int l = 0;
         int r = length - 1;
 
-        while (l < r) {
+        while (l <= r) {
             int mid = l + ((r - l) >> 1);
             if (target == nums[mid])
                 return mid;
 
             if (nums[l] <= nums[mid]) {  //判断左节点和中间节点是否在同个连续区间
                 if (target >= nums[l] && target < nums[mid]) {  //目标是否在连续区间内
-                    l = mid - 1;
+                    r = mid - 1;
                 } else {
                     l = mid + 1;
                 }
             } else {        //反之右节点和中间节点在同个连续区间
                 if (target > nums[mid] && target <= nums[r]) {  //目标是否在连续区间内
-                    r = mid + 1;
+                    l = mid + 1;
                 } else {
                     r = mid - 1;
                 }
