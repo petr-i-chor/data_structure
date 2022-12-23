@@ -30,22 +30,26 @@ public class o到n减1中缺失的数字 {
 
     @Test
     public void main() {
-        System.out.println(missingNumber(new int[]{0,1,2,3,4,5,6,7,9}));
+        System.out.println(missingNumber(new int[]{1, 2, 3, 4, 5, 6, 7, 8}));
     }
 
     public int missingNumber(int[] nums) {
 
-        return partition(nums, 0, nums.length);
+        return partition(nums, 0, nums.length - 1);
     }
 
     public int partition(int[] nums, int l, int r) {
         int mid = ((r - l) >> 1) + l;
         if (nums[mid] > mid) {
+            if (mid == l)
+                return nums[l];
             if (nums[mid - 1] == mid - 1)
                 return mid;
             else
                 return partition(nums, l, mid - 1);
         } else {
+            if (mid == r)
+                return nums[r];
             if (nums[mid + 1] > mid + 1)
                 return mid + 1;
             else
