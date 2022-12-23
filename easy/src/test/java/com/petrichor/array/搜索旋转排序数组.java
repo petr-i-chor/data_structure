@@ -42,7 +42,7 @@ public class 搜索旋转排序数组 {
      */
     @Test
     public void test() {
-//        int[] nums = { 0 ,1 , 2 , 4,5, 6, };
+//        int[] nums = { 0 ,1 , 2 , 4, 5, 6, };
         int[] nums = {1, 0};
         int target = 1;
         System.out.println(search(nums, target));
@@ -50,59 +50,41 @@ public class 搜索旋转排序数组 {
 
     public int search(int[] nums, int target) {
 
-        //直接二分查找
-
-        int index = 0;
-
-        for (int i = 0; i < nums.length; i++) {
-            if (i == nums.length - 1) {
-                index = nums.length >> 1;
-                break;
-            }
-            if (nums[i] > nums[i + 1]) {
-                index = i;
-                break;
-            }
-        }
-
-        //二分查找
-        if (nums[index] == target)
-            return index;
-        else if (nums[index-1] >= target && nums[0] <= target) {
-            return binarySearch(0, index-1, nums, target);
-        } else if (nums[index] <= target && nums[nums.length - 1] >= target) {
-            return binarySearch(index, nums.length - 1, nums, target);
-        } else {
+        /**
+         * 找出有序
+         */
+        int length = nums.length;
+        if (length == 0)
             return -1;
+        if (length == 1)
+            return target == nums[0] ? 0 : -1;
+
+        int l = 0;
+        int r = length - 1;
+
+        while (l < r) {
+            int mid = l + ((r - l) >> 1);
+            if (target == nums[mid])
+                return mid;
+
+            if (nums[l] <= nums[mid]) {  //判断左节点和中间节点是否在同个连续区间
+                if (target >= nums[l] && target < nums[mid]) {  //目标是否在连续区间内
+                    l = mid - 1;
+                } else {
+                    l = mid + 1;
+                }
+            } else {        //反之右节点和中间节点在同个连续区间
+                if (target > nums[mid] && target <= nums[r]) {  //目标是否在连续区间内
+                    r = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
+            }
         }
+
+        return -1;
     }
 
-    public int binarySearch(int begin, int end, int[] nums, int target) {
-        if (nums[begin] == target)
-            return begin;
-        if (nums[end] == target)
-            return end;
 
-        if (end < begin)
-            return -1;
-
-        int pivot = begin + ((end - begin) >> 1);
-        if (nums[pivot] == target)
-            return pivot;
-        else if (nums[pivot] > target) {
-            return binarySearch(begin, pivot - 1, nums, target);
-        } else {
-            return binarySearch(pivot + 1, end, nums, target);
-        }
-    }
-
-      /*      int[] copy = new int[nums.length];
-        int cur = index;
-        for (int i = 0; i < nums.length; i++) {
-            if (cur == nums.length)
-                cur = 0;
-            if (cur < nums.length)
-                copy[i] = nums[cur++];
-        }*/
 }
 
