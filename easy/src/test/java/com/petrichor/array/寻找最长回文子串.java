@@ -69,12 +69,19 @@ public class 寻找最长回文子串 {
      */
     public String getPalindrome(String s, int left, int right) {
 
+        /**
+         * 3种情况 ->
+         *      1 a      s.substring(left+1,right) = a;  符合要求
+         *      2 ac     s.substring(left+1,right) = ''; 不符合要求，但无所谓
+         *      3 aa     s.substring(left+1,right) = aa; 符合要求
+         */
+
         while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
             left--;
             right++;
         }
 
-        return s.substring(left+1,right);
+        return s.substring(left+1,right);  //substring 是左闭右开的
     }
 
 }
