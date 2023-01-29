@@ -44,114 +44,166 @@ public class 正则表达式匹配 {
 
     @Test
     public void main() {
-        System.out.println(isMatch("abcd", "d*"));
+        System.out.println(isMatch("aa", "c*a*b*.."));
     }
 
     public boolean isMatch(String s, String p) {
 
-        return isSame(s, 0, p, 0);
+        return true;
+//        return isSame(s, 0, p, 0);
     }
 
-    public boolean isSame(String s, int sIndex, String p, int pIndex) {
 
-//        if (sIndex == s.length() && (p.length() == pIndex || (p.charAt(pIndex - 2) == s.charAt(sIndex - 1) && p.charAt(pIndex - 1) == '*')))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//    public boolean isSame(String s, int sIndex, String p, int pIndex) {
+//
+////        if (sIndex == s.length() && (p.length() == pIndex || (p.charAt(pIndex - 2) == s.charAt(sIndex - 1) && p.charAt(pIndex - 1) == '*')))
+////            return true;
+//        /**
+//         * 出口 s.length() = sIndex
+//         * 判断 s.charAt(sIndex-1) 是否和 p.substring(pIndex+1,p.length()) 正则匹配
+//         */
+//
+//        if (pIndex >= p.length() && sIndex < s.length())
+//            return false;
+//
+//        if (pIndex >= p.length() && sIndex == s.length())
 //            return true;
-        /**
-         * 出口 s.length() = sIndex
-         * 判断 s.charAt(sIndex-1) 是否和 p.substring(pIndex+1,p.length()) 正则匹配
-         */
-
-        if (pIndex >= p.length() && sIndex < s.length() )
-            return false;
-
-        if (pIndex >= p.length() && sIndex == s.length())
-            return true;
-
-        if (pIndex < p.length() && sIndex == s.length()) {
-            char lastC = s.charAt(sIndex - 1);
-            while (p.length() < pIndex) {
-                char pC = p.charAt(pIndex);
-                if (p.length() == pIndex + 1 && s.length() == sIndex + 1)
-                    if (s.charAt(sIndex) == p.charAt(pIndex)|| p.charAt(sIndex)=='.')
-                        return true;
-                    else
-                        return false;
-                char pC1 = p.charAt(pIndex + 1);
-                if (pC == '.' && pC1 == '*')
-                    return true;
-                if (pC1 == '*') {
-                    pIndex += 2;
-                } else {
-                    if (pC == lastC || pC == '.') {
-                        pIndex++;
-                    } else {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-        char sC = s.charAt(sIndex);
-        char pC = p.charAt(pIndex);
-        if (p.length() == pIndex + 1 && s.length() == sIndex + 1) {
-            if (s.charAt(sIndex) == p.charAt(pIndex) || p.charAt(sIndex)=='.')
-                return true;
-            else
-                return false;
-        } else if (p.length() == pIndex + 1 && s.length() > sIndex + 1)
-            return false;
-
-
-        char pC1 = p.charAt(pIndex + 1);
-        if (pC == '.' && pC1 == '*'){
-            //递归找到第一个字母
-            //回溯返回p索引
-            int codeIndex = findMostCloseCode(p, pIndex, 0, s.length() - sIndex - 1);
-            if (codeIndex == -1){
-                return false;
-            }else if (codeIndex == p.length()){
-                return true;
-            }else {
-                for (int i = sIndex; i < s.length(); i++) {
-                }
-                return isSame(s,sIndex,p,codeIndex);
-            }
-
-        }
-
-        if (pC1 == '*') {
-            if (pC == sC) {
-                return isSame(s, ++sIndex, p, pIndex);
-            } else {
-                return isSame(s, sIndex, p, pIndex + 2);
-            }
-        } else {
-            if (pC == sC || pC == '.') {
-                return isSame(s, ++sIndex, p, ++pIndex);
-            } else {
-                return false;
-            }
-        }
-
-    }
-
-    int findMostCloseCode(String p,int pIndex,int count,int sRemainLen){
-        if (pIndex >= p.length())
-            return pIndex;
-
-        if ('a'<= p.charAt(pIndex) && 'z' >= p.charAt(pIndex)){
-            return pIndex;
-        }else if (p.charAt(pIndex+1) == '*'){
-            findMostCloseCode(p,pIndex+2,count,sRemainLen);
-        }else {
-            findMostCloseCode(p,pIndex+1,count,sRemainLen);
-            count++;
-            if (count>sRemainLen)
-                return -1;
-        }
-
-        return -1;
-    }
+//
+//        if (pIndex < p.length() && sIndex == s.length()) {
+//            while (p.length() > pIndex) {
+//                //判断p剩余正则是否能匹配0个字符
+//                if (pIndex + 1 < p.length()) {
+//                    if (p.charAt(pIndex + 1) == '*') {
+//                        pIndex += 2;
+//                    } else {
+//                        return false;
+//                    }
+//                } else
+//                    return false;
+//            }
+//            return true;
+//        }
+//
+//        char sC = s.charAt(sIndex);
+//        char pC = p.charAt(pIndex);
+//        if (p.length() == pIndex + 1 && s.length() == sIndex + 1) {
+//            if (s.charAt(sIndex) == p.charAt(pIndex) || p.charAt(sIndex) == '.')
+//                return true;
+//            else
+//                return false;
+//        } else if (p.length() == pIndex + 1 && s.length() > sIndex + 1)
+//            return false;
+//
+//
+//        char pC1 = p.charAt(pIndex + 1);
+//        if (pC == '.' && pC1 == '*') {
+//            //递归找到第一个字母
+//            //回溯返回p索引
+//            int codeIndex = findMostCloseCode(p, pIndex, 0, s.length() - sIndex - 1);
+//            if (codeIndex == -1) {
+//                return false;
+//            } else if (codeIndex == p.length()) {
+//                return true;
+//            } else {
+//                for (int i = sIndex; i < s.length(); i++) {
+//                    if (s.charAt(i) == p.charAt(codeIndex))
+//                        return isSame(s, i + 1, p, codeIndex + 1);
+//                }
+//            }
+//
+//        }
+//
+//        if (pC1 == '*') {
+//            if (pC == sC) {
+//                return isSame(s, ++sIndex, p, pIndex);
+//            } else {
+//                return isSame(s, sIndex, p, pIndex + 2);
+//            }
+//        } else {
+//            if (pC == sC || pC == '.') {
+//                return isSame(s, ++sIndex, p, ++pIndex);
+//            } else {
+//                return false;
+//            }
+//        }
+//
+//    }
+//
+//    private Boolean getCodeIndex(String s, int sIndex, String p, int pIndex, char pC, char pC1) {
+//        if (pC == '.' && pC1 == '*') {
+//            //递归找到第一个字母
+//            //回溯返回p索引
+//            int codeIndex = findMostCloseCode(p, pIndex, 0, s.length() - sIndex - 1);
+//            if (codeIndex == -1) {
+//                return false;
+//            } else if (codeIndex == p.length()) {
+//                return true;
+//            } else {
+//                for (int i = sIndex; i < s.length(); i++) {
+//                    if (s.charAt(i) == p.charAt(codeIndex))
+//                        return isSame(s, i + 1, p, codeIndex + 1);
+//                }
+//            }
+//
+//        }
+//        return null;
+//    }
+//
+//    /**
+//     * @author: jh
+//     * @description:
+//     * @params: sRemainLen s的长度-s的当前索引-1
+//     * @return:
+//     */
+//
+//    int findMostCloseCode(String p, int pIndex, int count, int sRemainLen) {
+//        if (pIndex >= p.length())
+//            return pIndex;
+//
+//        if ('a' <= p.charAt(pIndex) && 'z' >= p.charAt(pIndex)) {
+//            count++;
+//            if (sRemainLen < count)
+//                return -1;
+//            else
+//                return pIndex;
+//        } else if (p.charAt(pIndex + 1) == '*') {
+//            return findMostCloseCode(p, pIndex + 2, count, sRemainLen);
+//        } else {
+//            count++;
+//            if (sRemainLen < count)
+//                return -1;
+//            else
+//                return findMostCloseCode(p, pIndex + 1, count, sRemainLen);
+//        }
+//
+//    }
 
 }
