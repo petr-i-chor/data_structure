@@ -44,26 +44,26 @@ public class 验证回文串 {
 
     @Test
     public void main() {
-        String s = " ";
-        System.out.println(isPalindrome(s));
+        String s = "  ";
+        System.out.println(isPalindrome2(s));
     }
 
     public boolean isPalindrome(String s) {
         ArrayList<Character> characters = new ArrayList<>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if ((c>=48 && c<=57) ||(c>=97 && c<=122)){
+            if ((c >= 48 && c <= 57) || (c >= 97 && c <= 122)) {
                 characters.add(c);
-            }else if (c>=65 && c<=90){
-                characters.add((char) (c+32));
+            } else if (c >= 65 && c <= 90) {
+                characters.add((char) (c + 32));
             }
         }
 
         int left = 0;
-        int right = characters.size()-1;
+        int right = characters.size() - 1;
 
-        for (int i = 0; i < Math.round(characters.size()/2.0); i++) {
-            if (characters.get(left++)!=characters.get(right--)){
+        for (int i = 0; i < Math.round(characters.size() / 2.0); i++) {
+            if (characters.get(left++) != characters.get(right--)) {
                 return false;
             }
         }
@@ -71,5 +71,44 @@ public class 验证回文串 {
         return true;
     }
 
+    public boolean isPalindrome2(String s) {  //优化，在判断左右对称的时候，顺便小写字母数字判断
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left <= right) {
+            char L = s.charAt(left);
+            char R = s.charAt(right);
+            while (left <= right) {
+                L = s.charAt(left);
+                if (L >= 65 && L <= 90) {
+                    L = (char) (L + 32);
+                    break;
+                } else if (!((L >= 48 && L <= 57) || (L >= 97 && L <= 122))) {
+                    left++;
+                } else {
+                    break;
+                }
+            }
+            while (left <= right) {
+                R = s.charAt(right);
+                if (R >= 65 && R <= 90) {
+                    R = (char) (R + 32);
+                    break;
+                } else if (!((R >= 48 && R <= 57) || (R >= 97 && R <= 122))) {
+                    right--;
+                } else {
+                    break;
+                }
+            }
+            if (L != R) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+
+        return true;
+    }
 
 }
