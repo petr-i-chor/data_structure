@@ -1,4 +1,4 @@
-package com.petrichor.basic;
+package com.petrichor.array;
 
 import org.junit.Test;
 
@@ -8,7 +8,6 @@ import java.util.Arrays;
  * @Author jh
  * @Description
  * @Date created in 10:31 2023/2/16
- */
 
 /*
  * 152. 乘积最大子数组
