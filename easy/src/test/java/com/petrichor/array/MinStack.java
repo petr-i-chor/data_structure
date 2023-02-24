@@ -49,18 +49,7 @@ import java.util.*;
  * pop、top 和 getMin 操作总是在 非空栈 上调用
  * push, pop, top, and getMin最多被调用 3 * 104 次
  */
-class aaa {
-    public static void main(String[] args) {
-        MinStack obj = new MinStack();
-        obj.push(2);
-        obj.push(3);
-        obj.push(1);
-        System.out.println(obj.getMin());
-        System.out.println(obj.top());
-        obj.pop();
-        System.out.println(obj.getMin());
-    }
-}
+
 
 
 class MinStack {         //弄多一个列表，将栈的元素排列，每次新增移除都是log（n），查找o(1)  =》LeetCode题解，根据栈先入先出的特性，可以记录每个元素插入时的最小值，新增减少查找的时间复杂度都是o（1）
