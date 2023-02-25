@@ -33,7 +33,7 @@ public class SougouImgPipeline {
     private volatile AtomicInteger fails;
 
     public SougouImgPipeline() {
-        setPath("D:\\ourchem\\uploadPath\\spider");
+        setPath("D:\\video_clip\\素材\\蔡徐坤\\图片");
         suc = new AtomicInteger();
         fails = new AtomicInteger();
     }
