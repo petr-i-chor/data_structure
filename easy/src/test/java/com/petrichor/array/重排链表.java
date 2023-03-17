@@ -37,23 +37,82 @@ import org.junit.Test;
 public class 重排链表 {
 
     @Test
-    public void main(){
-        ListNode head = new ListNode(1,new ListNode(2,new ListNode(3,new ListNode(4))));
-        reorderList(head);
-    }
-
-    public void reorderList(ListNode head) {
-        while (true) {
-            ListNode next = head.next;
-
-            while (next.next==null){
-                next = next.next;
-            }
-            ListNode tmp = head.next;
-            head.next=next;
-            next.next=tmp;
-
+    public void main() {
+//        ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+        ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+        reorderList2(head);
+        while (head != null) {
+            System.out.println(head.val);
+            head = head.next;
         }
     }
 
+    public void reorderList(ListNode head) {        //通过 530ms,天哪！！
+        //暴力解法，o(n2)
+        while (head != null) {
+            ListNode next = head.next;
+
+            if (next == null || next.next == null)
+                break;
+
+            while (next.next.next != null) {
+                next = next.next;
+            }
+            ListNode last = next.next;
+            next.next = null;
+            ListNode tmp = head.next;
+            head.next = last;
+            last.next = tmp;
+            head = head.next.next;
+        }
+    }
+
+    //    12345678
+    public void reorderList2(ListNode head) {
+        //快慢指针，找到中点，反转链表，交叉添加
+        ListNode low = head;
+        ListNode fast = head.next;
+        if (fast==null||fast.next==null)
+            return;
+        while (fast != null) {
+            low = low.next;
+
+            if (fast.next == null) {
+                break;
+            }
+            fast = fast.next.next;
+        }
+
+        ListNode reversalHead = low.next;
+        low.next = null;
+        ListNode next = reversalHead.next;
+        reversalHead.next=null;
+        ListNode dps = dps(reversalHead, next);
+        dps2(head, dps);
+    }
+
+
+    public ListNode dps(ListNode head, ListNode next) {
+        if (next == null) {
+            return head;
+        } else if (next.next == null) {
+            next.next = head;
+            return next;
+        }
+
+        ListNode nextNext = next.next;
+        next.next = head;
+        return dps(next, nextNext);
+    }
+
+    public void dps2(ListNode head, ListNode next) {
+        if (next == null)
+            return;
+
+        ListNode headNext = head.next;
+        ListNode nextNext = next.next;
+        head.next = next;
+        next.next = headNext;
+        dps2(headNext, nextNext);
+    }
 }
