@@ -68,6 +68,8 @@ public class 和大于等于target的最短子数组 {
 
         if (nums[0] > target)
             return 1;
+        if (nums.length==1)
+            return nums[0]>target?1:0;
 
         int left = 0;
         int right = 1;
