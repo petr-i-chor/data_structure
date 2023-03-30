@@ -1,4 +1,4 @@
-package com.petrichor.toof2_special;
+package com.petrichor.toof_special;
 
 /**
  * @Author jh
@@ -9,7 +9,6 @@ package com.petrichor.toof2_special;
 import org.junit.Test;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * 剑指 Offer II 006. 排序数组中两个数字之和
