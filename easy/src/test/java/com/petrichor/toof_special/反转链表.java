@@ -49,8 +49,6 @@ public class 反转链表 {
         while (node.next!=null){
             node = node.next;
         }
-
-
         recurrence(head);
         return node;
     }
