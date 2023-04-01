@@ -28,7 +28,7 @@ import org.junit.Test;
  * 链表中节点的数目范围是 [0, 5000]
  * -5000 <= Node.val <= 5000
  */
-public class 反转列表 {
+public class 反转链表 {
 
     @Test
     public void main() {
